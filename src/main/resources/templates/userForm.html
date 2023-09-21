@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:fragment="userForm" id="userForm">
+    <div class="modal-body">
+        <label>Id</label>
+        <input type="text" name="id" readonly class="form-control">
+
+        <label>First name</label>
+        <input type="text" name="firstName" class="form-control">
+
+        <label>Last name</label>
+        <input type="text" name="lastName" class="form-control">
+
+        <label>Age</label>
+        <input type="text" name="age" class="form-control">
+
+        <label>Password</label>
+        <input type="text" name="password" class="form-control">
+
+        <label>Role</label>
+        <select multiple class="form-control" name="user_role">
+            <option>ADMIN</option>
+            <option selected>USER</option>
+        </select>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+        </button>
+        <button id="modalButtonText" type="button" class="btn btn-primary" data-bs-dismiss="modal">
+            Edit
+        </button>
+    </div>
+</form>
+</body>
+</html>
