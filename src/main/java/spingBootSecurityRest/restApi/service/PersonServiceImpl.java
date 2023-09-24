@@ -1,13 +1,10 @@
 package spingBootSecurityRest.restApi.service;
 
 
-
-import org.hibernate.Hibernate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import spingBootSecurityRest.restApi.model.Person;
-import spingBootSecurityRest.restApi.repositories.PeopleRepository;
+import spingBootSecurityRest.restApi.repositories.PersonRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,36 +13,31 @@ import java.util.Optional;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-    private final PeopleRepository peopleRepository;
-    @Autowired
-    public PersonServiceImpl(PeopleRepository peopleRepository) {
-        this.peopleRepository = peopleRepository;
+    private final PersonRepository personRepository;
+
+    public PersonServiceImpl(PersonRepository personRepository) {
+        this.personRepository = personRepository;
     }
 
     @Transactional
     @Override
     public void addNewPerson(Person person) {
-        peopleRepository.save(person);
+        personRepository.save(person);
     }
 
     @Override
-    public Person getPersonById(int id) { return peopleRepository.getById(id); }
+    public Person getPersonById(int id) { return personRepository.getById(id); }
 
     @Override
-    @Transactional
-    public Optional<Person> getPersonByName(String name){
-        Optional<Person> optionalPerson = peopleRepository.findByFirstName(name);
-        Hibernate.initialize(optionalPerson.get().getRoles());
-        return optionalPerson;
-    }
+    public Optional<Person> getPersonByName(String name){ return personRepository.findByFirstName(name); }
     @Override
-    public List<Person> getAllPersons() { return peopleRepository.findAll(); }
+    public List<Person> getAllPersons() { return personRepository.findAll(); }
 
     @Transactional
     @Override
-    public void changePersonById(Person person) { peopleRepository.save(person); }
+    public void changePersonById(Person person) { personRepository.save(person); }
 
     @Transactional
     @Override
-    public void deletePersonById(int id){ peopleRepository.deleteById(id); }
+    public void deletePersonById(int id){ personRepository.deleteById(id); }
 }

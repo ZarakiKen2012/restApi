@@ -5,7 +5,7 @@ import spingBootSecurityRest.restApi.model.Role;
 import java.util.HashSet;
 import java.util.Set;
 
-public class PersonDTO {
+public class PersonDto {
 
     private int id;
 

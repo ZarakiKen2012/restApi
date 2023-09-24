@@ -1,8 +1,8 @@
 package spingBootSecurityRest.restApi.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import spingBootSecurityRest.restApi.dto.PersonDTO;
+import spingBootSecurityRest.restApi.converters.PersonConverter;
+import spingBootSecurityRest.restApi.dto.PersonDto;
 import spingBootSecurityRest.restApi.model.Person;
 import spingBootSecurityRest.restApi.service.PersonService;
 
@@ -12,12 +12,12 @@ import java.util.List;
 @RequestMapping(value = "api/admin/")
 public class AdminRestController {
     private final PersonService personService;
+    private final PersonConverter personConverter;
 
-    @Autowired
-    public AdminRestController(PersonService personService) {
+    public AdminRestController(PersonService personService, PersonConverter personConverter) {
         this.personService = personService;
+        this.personConverter = personConverter;
     }
-
 
     @GetMapping()
     public List<Person> getAllPerson() {
@@ -25,8 +25,8 @@ public class AdminRestController {
     }
 
     @GetMapping(value = "/{id}")
-    public PersonDTO getPerson(@PathVariable("id") int id) {
-        return covertToPersonDTO(personService.getPersonById(id));
+    public PersonDto getPerson(@PathVariable("id") int id) {
+        return personConverter.convertToPersonDto(personService.getPersonById(id));
     }
 
     @PatchMapping()
@@ -42,14 +42,5 @@ public class AdminRestController {
     public int savePerson(@RequestBody Person person){
         personService.addNewPerson(person);
         return personService.getPersonByName(person.getFirstName()).get().getId();
-    }
-    private PersonDTO covertToPersonDTO(Person person) {
-        PersonDTO personDTO = new PersonDTO();
-        personDTO.setId(person.getId());
-        personDTO.setFirstName(person.getFirstName());
-        personDTO.setLastName(person.getLastName());
-        personDTO.setAge(person.getAge());
-        personDTO.setPassword(person.getPassword());
-        return personDTO;
     }
 }

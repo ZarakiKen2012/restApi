@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "person")
+@Table(name = "persons")
 public class Person implements UserDetails {
 
     @Id
@@ -32,7 +32,7 @@ public class Person implements UserDetails {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(//Настройка таблицы для хранения инфы о связи
-            name = "person_role",//имя таблицы
+            name = "persons_roles",//имя таблицы
             joinColumns = @JoinColumn(name = "person_id"),//Столбец для связи из таблицы Юзер
             inverseJoinColumns = @JoinColumn(name = "role_id")//Столбец для связи из таблицы Роли
     )

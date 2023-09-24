@@ -1,7 +1,6 @@
 package spingBootSecurityRest.restApi.service;
 
 
-import org.hibernate.Hibernate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +16,6 @@ public class PersonDetailsService implements UserDetailsService {
     public PersonDetailsService(PersonServiceImpl personServiceImpl) {
         this.personServiceImpl = personServiceImpl;
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

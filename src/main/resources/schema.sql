@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS person_role;
-DROP TABLE IF EXISTS person;
+DROP TABLE IF EXISTS persons_roles;
+DROP TABLE IF EXISTS persons;
 DROP TABLE IF EXISTS roles;
-CREATE TABLE person
+CREATE TABLE persons
 (
     id        int PRIMARY KEY AUTO_INCREMENT,
     first_Name VARCHAR(255) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE roles
     role VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE person_role
+CREATE TABLE persons_roles
 (
     id        int PRIMARY KEY AUTO_INCREMENT,
     person_id int NOT NULL,
